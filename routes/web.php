@@ -103,7 +103,7 @@ Route::get('Paises', function () {
             "ciudades" => [
                 "Guayaquil",
                 "Cuenca",
-                "Ambato",
+                
             ]
         ],
         "Peru" => [
@@ -114,6 +114,7 @@ Route::get('Paises', function () {
                 "Cusco",
                 "Arequipa",
                 "Trujillo",
+                "Tacna"
             ]
         ],
         
@@ -125,9 +126,21 @@ Route::get('Paises', function () {
             "ciudades" => [
                 "Rosario",
                 "Santa Fe",
-                "Salta",
+                
             ]
         ],
+
+        "Francia" =>[
+            "capital" => "Paris",
+            "moneda" => "Euro",
+            "poblacion" => 67.39,
+            "ciudades" => [
+                "Lyon",
+                "Marsella",
+                "Niza"
+
+            ]
+        ]
     ];
 
     // Mostrar vista de paises
