@@ -11,20 +11,31 @@
     <h1>PAÍSES DE LA REGIÓN</h1>
 
     <div>
-        <table class="table table-dark table-striped">
+        <table class="table  table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Capital</th>
                     <th scope="col">Moneda</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Poblacion</th>
+                    <th scope="col">Ciudades</th>
+
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach($vivideros as $nombre => $pais)
+                @foreach($paises as $nombre => $pais)
                 <tr>
-                    <td>{{ $nombre }}</td>
-                </tr>
+                    <td rowspan ='{{ count ($pais["ciudades"]) }}'>
+                        {{ $nombre }}
+                    </td>
+                    <td rowspan = '{{ count ($pais["ciudades"]) }}'>{{ $pais["capital"] }}</td>
+                    <td rowspan = '{{ count ($pais["ciudades"]) }}'>{{ $pais["moneda"] }}</td>
+                    <td rowspan = '{{ count ($pais["ciudades"]) }}'>{{ $pais["poblacion"] }} millones hab. </td>
+                    @foreach($pais["ciudades"] as $ciudad)
+                         <td>{{ $ciudad }}</td>
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

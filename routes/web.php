@@ -83,54 +83,46 @@ Route::get('/Arreglo', function() {
     // }
 });
 
-Route::get('/Paises', function () {
+Route::get('Paises', function () {
 
     $paises = [
         "Colombia" => [
-            "CAPITAL" => "Bogotá",
-            "MONEDA" => "Peso",
-            "POBLACIÓN" => 50.88,
-            "CIUDADES" => [
-                "Medelín",
+            "capital" => "Bogotá",
+            "moneda" => "Peso",
+            "poblacion" => 51.6,
+            "ciudades" => [
+                "Medellín",
                 "Barranquilla",
                 "Cali",
             ]
         ],
-        "Peru" => [
-            "CAPITAL" => "Lima",
-            "MONEDA" => "Sol",
-            "POBLACIÓN" => 32.97,
-            "CIUDADES" => [
-                "Cusco",
-                "Arequipa",
-                "Trujillo",
-            ]
-        ],
-        "Paraguay" => [
-            "CAPITAL" => "Asunción",
-            "MONEDA" => "Guaraní paraguayo",
-            "POBLACIÓN" => 7.13,
-            "CIUDADES" => [
-                "Ciudad del Este",
-                "Encarnación",
-                "Villarrica",
-            ]
-        ],
         "Ecuador" => [
-            "CAPITAL" => "Quito",
-            "MONEDA" => "Dólar Estadounidense",
-            "POBLACIÓN" => 17.64,
-            "CIUDADES" => [
+            "capital" => "Quito",
+            "moneda" => "Dólar ",
+            "poblacion" => 20,
+            "ciudades" => [
                 "Guayaquil",
                 "Cuenca",
                 "Ambato",
             ]
         ],
+        "Peru" => [
+            "capital" => "Lima",
+            "moneda" => "Sol",
+            "poblacion" => 32.97,
+            "ciudades" => [
+                "Cusco",
+                "Arequipa",
+                "Trujillo",
+            ]
+        ],
+        
+        
         "Argentina" => [
-            "CAPITAL" => "Buenos Aires",
-            "MONEDA" => "Peso Argentino",
-            "POBLACIÓN" => 45.38,
-            "CIUDADES" => [
+            "capital" => "Buenos Aires",
+            "moneda" => "Peso Argentino",
+            "poblacion" => 45.38,
+            "ciudades" => [
                 "Rosario",
                 "Santa Fe",
                 "Salta",
@@ -140,5 +132,8 @@ Route::get('/Paises', function () {
 
     // Mostrar vista de paises
 
-    return view('paises')->with('vivideros', $paises);
+    return view('paises')
+           ->with('paises', $paises);
 });
+
+
