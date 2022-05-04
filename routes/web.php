@@ -149,4 +149,7 @@ Route::get('Paises', function () {
            ->with('paises', $paises);
 });
 
+Route::get('Prueba', function(){
+    return view('productos.create');
+});
 
