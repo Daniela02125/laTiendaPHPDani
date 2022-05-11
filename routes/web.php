@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,3 +154,5 @@ Route::get('Prueba', function(){
     return view('productos.create');
 });
 
+Route::resource('productos', 
+             ProductoController::class);
