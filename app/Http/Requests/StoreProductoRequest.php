@@ -25,10 +25,11 @@ class StoreProductoRequest extends FormRequest
     {
 
         return[
-            "nombre" => 'required|alpha',
+            "nombre" => 'required|alpha|unique:productos,nombre',
             "desc" => 'required|max:100',
             "precio"  =>'required|numeric|max:10000',
             "categoria" => 'required',
+            'imagen'=> 'required|image',
             "marca"=> 'required'
 
         ];
@@ -40,9 +41,11 @@ class StoreProductoRequest extends FormRequest
     public function messages(){
         return[
             'required'=> 'dato obligatorio',
+            'unique'=> 'El producto ya existe',
             'alpha' => 'solo letras',
             'max'=> 'maximo :max caracteres',
-            'numeric'=> 'solo numeros'
+            'numeric'=> 'solo numeros',
+            'imagen'=> 'solo imagenes'
         ];
     }
 }

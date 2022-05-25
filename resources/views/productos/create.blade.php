@@ -1,13 +1,14 @@
 @extends('layout.principal')
 
 @section('contenido')
+
 <div class="row">
   <h1 class="light-blue-text text-darken-4"> Nuevo Producto </h1>
 </div>
 
 <div class="row">
     <form class="col s12" method="POST"
-    action="{{ route('productos.store')}}">
+    action="{{ route('productos.store')}}" enctype="multipart/form-data">
 
     @csrf
     @if(session('mensaje'))
@@ -51,6 +52,7 @@
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
+      <span>{{$errors->first('imagen')}}</span>
     </div>
       </div>
 

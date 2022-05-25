@@ -16,7 +16,11 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        echo "aqui va a ir el catalogo de productos";
+        $productos = Producto::all();
+        //mostrar la vista del catalogo
+        return view('productos.index')
+          ->with('productos', $productos);
+
     }
 
     /**
@@ -51,6 +55,16 @@ class ProductoController extends Controller
         $p->precio = $request->precio;
         $p->marca_id = $request->marca;
         $p->categoria_id = $request->categoria;
+         
+        //var_dump($request->imagen->getClientOriginalname());
+        //mover el archivo cargado a la carpeta public/img 
+        //echo"<hr />";
+        //var_dump(public_path());
+        $archivo = $request->imagen;
+        $p->imagen = $archivo->getClientOriginalName();
+        $ruta = public_path()."/img";
+        $archivo->move($ruta,
+                       $archivo->getClientOriginalName());
 
         $p->save();
 
