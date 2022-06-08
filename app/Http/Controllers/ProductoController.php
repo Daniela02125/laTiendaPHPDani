@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Producto;
 use App\Models\Marca;
 use App\Models\Categoria;
-use App\Http\Requests\StoreProductoRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
@@ -17,10 +19,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        //mostrar la vista del catalogo
-        return view('productos.index')
-          ->with('productos', $productos);
-
+        return view('producto.index')->with('productos', $productos);
     }
 
     /**
@@ -30,14 +29,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //seleccionar marcas de la base de datos: model marca
         $marcas = Marca::all();
-        //seleccionar categorias de la base de datos: model categorias
         $categorias = Categoria::all();
-        //mostrar el formulario, enviando los datos
-        return view('productos.create')
-        ->with("marcas", $marcas)
-        ->with("categorias", $categorias);
+        return view('producto.create')->with("marcas", $marcas)->with("categorias", $categorias);
     }
 
     /**
@@ -46,39 +40,34 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductoRequest $request)
+    public function store(StoreProductRequest $request)
     {
-
         $p = new Producto();
         $p->nombre = $request->nombre;
         $p->desc = $request->desc;
         $p->precio = $request->precio;
         $p->marca_id = $request->marca;
         $p->categoria_id = $request->categoria;
-         
-        //var_dump($request->imagen->getClientOriginalname());
-        //mover el archivo cargado a la carpeta public/img 
-        //echo"<hr />";
-        //var_dump(public_path());
+
+        // Objeto File
+
         $archivo = $request->imagen;
         $p->imagen = $archivo->getClientOriginalName();
-        $ruta = public_path()."/img";
-        $archivo->move($ruta,
-                       $archivo->getClientOriginalName());
+
+        // Ruta donde se almacena el archivo
+
+        $ruta = public_path()."/img/producto";
+        
+        // Movemos archivo a ruta
+
+        $archivo->move($ruta, $request->imagen->getClientOriginalName());
 
         $p->save();
+        
+        //Redireccionar a una ruta disponible.
 
-        //redireccionar a una ruta
-        return redirect('productos/create')
-            ->with('mensaje', 'producto registrado exitosamente');
-
-
+        return redirect('productos/create')->with('mensaje', "Producto registrado exitosamente.");
     }
-
-
-
-
-
 
     /**
      * Display the specified resource.
@@ -88,7 +77,14 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "aqui va a mostrar el detalle del producto";
+        // Seleccionar el producto a mostrar
+
+        $p = Producto::find($producto);
+
+        // Mostrar vista de detalles de producto
+        // Enviándole el producto seleccionado
+
+        return view('producto.details')->with('producto', $p);
     }
 
     /**
@@ -99,7 +95,7 @@ class ProductoController extends Controller
      */
     public function edit($producto)
     {
-        echo "aqui se muestra el form de editar producto";
+        echo "Aquí se muestra el form de editar producto.";
     }
 
     /**
@@ -111,7 +107,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        echo "aqui se va a guardar el producto editado";
+        echo "Guarda el producto editado.";
     }
 
     /**
@@ -122,6 +118,6 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        echo "aqui se elimina el producto";
+        echo "Eliminar el producto.";
     }
 }

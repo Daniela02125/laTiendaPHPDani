@@ -11,29 +11,25 @@
     <h1>PAÍSES DE LA REGIÓN</h1>
 
     <div>
-        <table class="table  table-striped">
+        <table class="table table-dark table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Capital</th>
                     <th scope="col">Moneda</th>
-                    <th scope="col">Poblacion</th>
+                    <th scope="col">Población</th>
                     <th scope="col">Ciudades</th>
-
-                    
                 </tr>
             </thead>
             <tbody>
                 @foreach($paises as $nombre => $pais)
                 <tr>
-                    <td style="color: violet"rowspan ='{{ count ($pais["ciudades"]) }}'>
-                        <b>{{ $nombre }}
-                    </td>
-                    <td style="color:red"rowspan = '{{ count ($pais["ciudades"]) }}'><b>{{ $pais["capital"] }}</td>
-                    <td style="color: green"rowspan = '{{ count ($pais["ciudades"]) }}'>{{ $pais["moneda"] }}</td>
-                    <td style="color: blue"rowspan = '{{ count ($pais["ciudades"]) }}'>{{ $pais["poblacion"] }} millones hab. </td>
-                    @foreach($pais["ciudades"] as $ciudad)
-                         <td>{{ $ciudad }}</td>
+                    <td style="color: red" rowspan='{{ count($pais["CIUDADES"]) }}' >{{ $nombre }}</td>
+                    <td style="color: blue" rowspan='{{ count($pais["CIUDADES"]) }}' >{{ $pais["CAPITAL"] }}</td>
+                    <td style="color: yellow" rowspan='{{ count($pais["CIUDADES"]) }}' >{{ $pais["MONEDA"] }}</td>
+                    <td style="color: while" rowspan='{{ count($pais["CIUDADES"]) }}' >{{ $pais["POBLACION"] }} Millones</td>
+                    @foreach($pais["CIUDADES"] as $ciudades )
+                        <td style="color: green">{{ $ciudades }}</td>
                         </tr>
                     @endforeach
                 @endforeach

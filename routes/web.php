@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,11 @@ Route::get('/', function () {
 // First Route
 // Route -> get
 
-Route::get('/Home', function () { 
-    echo "Hola le dijo la araña a la mosca"; 
-});
-
-// Ruta de prueba
-
 Route::get('/Home', function () {
-    echo "<h1>Hola ficha 2236903</h1>";
+    echo "Hola le dijo la araña a la mosca";
 });
 
-Route::get('/Arreglo', function() {
+Route::get('/Arreglo', function () {
 
     // Arreglo de estudiantes
     $estudiantes = [
@@ -44,9 +39,9 @@ Route::get('/Arreglo', function() {
             "Veinticinco"
         ],
     ];
-    
+
     // Verificar la variable
-    
+
     echo "<hr />";
     echo "<pre>";
     echo "<h1>Antes de eliminar</h1>";
@@ -84,75 +79,75 @@ Route::get('/Arreglo', function() {
     // }
 });
 
-Route::get('Paises', function () {
+Route::get('/Paises', function () {
 
     $paises = [
         "Colombia" => [
-            "capital" => "Bogotá",
-            "moneda" => "Peso",
-            "poblacion" => 51.6,
-            "ciudades" => [
-                "Medellín",
+            "CAPITAL" => "Bogotá",
+            "MONEDA" => "Peso",
+            "POBLACION" => 50.88,
+            "CIUDADES" => [
+                "Medelín",
                 "Barranquilla",
                 "Cali",
             ]
         ],
-        "Ecuador" => [
-            "capital" => "Quito",
-            "moneda" => "Dólar ",
-            "poblacion" => 20,
-            "ciudades" => [
-                "Guayaquil",
-                "Cuenca",
-                
-            ]
-        ],
         "Peru" => [
-            "capital" => "Lima",
-            "moneda" => "Sol",
-            "poblacion" => 32.97,
-            "ciudades" => [
+            "CAPITAL" => "Lima",
+            "MONEDA" => "Sol",
+            "POBLACION" => 32.97,
+            "CIUDADES" => [
                 "Cusco",
                 "Arequipa",
                 "Trujillo",
-                "Tacna"
             ]
         ],
-        
-        
+        "Paraguay" => [
+            "CAPITAL" => "Asunción",
+            "MONEDA" => "Guaraní paraguayo",
+            "POBLACION" => 7.13,
+            "CIUDADES" => [
+                "Ciudad del Este",
+                "Encarnación",
+                "Villarrica",
+            ]
+        ],
+        "Ecuador" => [
+            "CAPITAL" => "Quito",
+            "MONEDA" => "Dólar Estadounidense",
+            "POBLACION" => 17.64,
+            "CIUDADES" => [
+                "Guayaquil",
+                "Cuenca",
+                "Ambato",
+            ]
+        ],
         "Argentina" => [
-            "capital" => "Buenos Aires",
-            "moneda" => "Peso Argentino",
-            "poblacion" => 45.38,
-            "ciudades" => [
+            "CAPITAL" => "Buenos Aires",
+            "MONEDA" => "Peso Argentino",
+            "POBLACION" => 45.38,
+            "CIUDADES" => [
                 "Rosario",
                 "Santa Fe",
-                
+                "Salta",
             ]
         ],
-
-        "Francia" =>[
-            "capital" => "Paris",
-            "moneda" => "Euro",
-            "poblacion" => 67.39,
-            "ciudades" => [
-                "Lyon",
-                "Marsella",
-                "Niza"
-
-            ]
-        ]
     ];
 
     // Mostrar vista de paises
 
-    return view('paises')
-           ->with('paises', $paises);
+    return view('paises')->with('paises', $paises);
 });
 
-Route::get('Prueba', function(){
-    return view('productos.create');
-});
+/**
+ * Rutas REST Producto
+ * 
+ */
 
-Route::resource('productos', 
-             ProductoController::class);
+Route::resource('productos', ProductoController::class);
+Route::resource('cart', CartController::class,['only' => [
+                                                            'index', 
+                                                            'store' , 
+                                                            'destroy'
+                                                           ]
+                                                ]);
