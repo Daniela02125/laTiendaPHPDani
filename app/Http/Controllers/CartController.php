@@ -13,13 +13,8 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        if(!session('cart')){
-            echo "No hay items en el carrito";
-        }else{
-            return view('cart.index');
-        }
-        
+    {
+        return view('cart.index');
     }
 
     /**
@@ -40,23 +35,23 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         //Estructura del producto
         $producto = [
-        [
-            "prod_id" => $request->prod_id,
-            "cantidad" => $request->cantidad,
-            "nombre_prod" => Producto::find($request->prod_id)->nombre
+            [
+                "prod_id" => $request->prod_id,
+                "cantidad" => $request->cantidad,
+                "precio" => $request-> precio,
+                "nombre_prod" => Producto::find($request->prod_id)->nombre
             ]
         ];
-        
-        if(!session('cart')){
+
+        if (!session('cart')) {
 
             $aux[] = $producto;
             //1.el primer producto en el carrito
-            session(['cart'=> $aux]);
-
-        }else{
+            session(['cart' => $aux]);
+        } else {
 
             //extraer los datos del carrito de la variable de session
             $aux = session('cart');
@@ -72,9 +67,7 @@ class CartController extends Controller
         //con mensaje de exito
 
         return redirect('productos')
-                        ->with('mensaje', 'El producto fue añadido al carrito.');
-
-
+            ->with('mensaje', 'El producto fue añadido al carrito.');
     }
 
     /**
@@ -120,6 +113,6 @@ class CartController extends Controller
     public function destroy($id)
     {
         session()->forget('cart');
-
+        return redirect('cart');
     }
 }
